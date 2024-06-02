@@ -45,7 +45,7 @@ const Nav = () => {
                             SignOut
                         </button>
                         <Link href='/profile'>
-                            <Image src='assets/images/logo.svg' alt='profileimg' height={37} width={37} className='rounded-full'></Image>
+                            <Image src={session?.user.image} alt='profileimg' height={37} width={37} className='rounded-full'></Image>
                         </Link>
                     </div>
                 ) : (
@@ -71,7 +71,7 @@ const Nav = () => {
                 {session?.user?  (
                     <div className='flex'>
                         <Image
-                            src='assets/images/logo.svg'
+                            src={session?.user.image}
                             width={37}
                             height={37}
                             className='rounded-full'

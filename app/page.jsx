@@ -1,9 +1,13 @@
-
+'use client'
 import Feed from "@components/Feed"
+import {  useSession } from "next-auth/react";
+
 const Home = () => {
+  const { data: session } = useSession();
 
   return (
     <section className="w-full flex-center flex-col">
+      <span className="orange_gradient text-center text-6xl ">Hello {session?.user.name}</span>
       <h1 className="head_text text-center">
         Discover and Share
 
