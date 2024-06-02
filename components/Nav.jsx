@@ -5,36 +5,37 @@ import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
-    const { data: session } = useSession();
-    const [loggedIn, setisloggedIn] = useState(true);
-    // const [providers, setProviders] = useState(null);
+    const { data: session } = useSession();//getting the session data from the browser
+    const [providers, setProviders] = useState(null);
     const [toggleDropdown, setToggleDropdown] = useState(false);
     //This is similar to what we use in useContext for state management and avoid prop drilling
 
-    // useEffect(() => {
-    //     const setProviders = async () => {
-    //         const response = getProviders();
-    //         // This function is typically used to dynamically display the available sign-in options to users.
-    //         setProviders(response); //Getting the providers and storing in the state
-    //     }
-    //     setProviders(); //for calling the function
+    useEffect(() => {
+        const setUpProviders = async () => {
+            const response = await getProviders();
+            // This function is typically used to dynamically display the available sign-in options to users.
+            setProviders(response); //Getting the providers and storing in the state
+        }
+        setUpProviders(); //for calling the function using use Effect
 
-    // }, [])
+    }, [])
     return (
         <nav className='flex-between w-full mb-16 pt-3'>
             <Link href='/' className='flex gap-2 flex-center'>
-                <Image src='assets/images/logo.svg'
+                <Image 
+                    src='assets/images/logo.svg'
                     alt='logo'
                     width={30}
                     height={30}
                     className='object-contain' />
                 <p className='logo_text'>Prompt Lab</p>
             </Link>
+           
 
             {/* Desktop navigation */}
             <div className="sm:flex hidden">
-                {/* {session} */}
-                {loggedIn ? (
+                {/* if any user in session display create post and SignOut */}
+                {session?.user? (
                     <div className='flex gap-3 md:gap-5'
                     >
                         <Link className='black_btn' href="/create-prompt">
@@ -59,15 +60,15 @@ const Nav = () => {
                                     signIn(provider.id);
                                 }}
                                 className='black_btn'>
-
+                                    Sign in with {provider.name}
                             </button>
                         ))}
                     </>
                 )}
             </div>
-
+               
             <div className="sm:hidden flex relative">
-                {loggedIn ? (
+                {session?.user?  (
                     <div className='flex'>
                         <Image
                             src='assets/images/logo.svg'
