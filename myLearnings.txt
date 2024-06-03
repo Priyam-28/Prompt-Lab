@@ -1,0 +1,93 @@
+Benefits of NextJS:
+1. React typically renders components on the client-side. This means that the initial HTML sent to the browser is minimal and the full content is generated and manipulated by JavaScript on the client side.CSR can lead to slower initial load times, especially on slower devices, because the JavaScript needs to be fully downloaded and executed before rendering the UI.
+User request karta hai toh server html and JS bhej deta hai JS ko compile karke wo Webpage display hota hai
+
+Server-Side Rendering (SSR): With SSR, the server generates the full HTML for a page and sends it to the client. Node.js can be used to render content on the server before sending it to the client, often in combination with frameworks like Express and libraries like React.
+Yahan par server sare components ko render karke client ko bhejta hai ek sath poora html page
+
+2.Search Engine optimisation (SSR) : It is difficult for the search engine to search for pages where components render one by one it is comparitively easier to search for a whole page
+
+3.NextJS uses file based routing system means there is no need of any external package for routing like accout about section just go to the folder  localhost:3000//about
+
+4.API routes-API routes in Next.js allow you to create backend endpoints as part of your Next.js application. These routes provide a way to handle HTTP requests and can be used to build APIs within the same project that serves your frontend. 
+
+5.Code Splitting- A technique for splitting large bundles of JS code into smaller ,more manageable chunks that can be loaded as needed
+
+ESLint: ESLint is a linting utility for JavaScript and other ECMAScript-based languages. It identifies and reports on patterns found in ECMAScript/JavaScript code, with the goal of making code more consistent and avoiding bugs.
+
+Entry Point is Layout.js having basic layout for each routes we make
+Layouts are used to wrap your page content and typically include elements that remain consistent across different pages, such as headers, footers, navigation menus, and sidebars. Using layouts helps maintain a uniform look and feel throughout your application and makes it easier to manage and update shared components.
+
+use client allows us to use react hooks in next js
+Every main folder can have ots own layout.js file defing the routes within that folder other tha the main layout inside app
+
+Another loading.js file can be added so that when the page.js loads the loading.js renders
+We can create error.js file for handling errors
+
+
+Data Fething ion Nextjs
+Server Side Rendering Getting data from the server through api and displaying without storing in the cache
+Static Side Generation Storing the data in the cache (By default)
+Incremental Static Generation Stored in chache but after some time it gets refresed and new data is cached
+
+NextJS supports followign http methods
+GET
+POST
+PUT:update or replace
+PATCH:Partially Update an existing resourse
+DELETE
+HEAD:Retives headers of a resourse
+OPTIONS: REtives supported HTTP methods and other communication options
+
+Static and Dynamic Metadata
+First we define layout.jsx and page.jsx
+
+
+
+Steps for authentication with Next-auth(provider)
+npm install next-auth
+Create the Provider component:
+// components/Provider.js
+'use client';
+
+import { SessionProvider } from "next-auth/react";
+
+const Provider = ({ children, session }) => (
+  <SessionProvider session={session}>
+    {children}
+  </SessionProvider>
+);
+
+export default Provider;
+// Jaise yahan pe session provider is used soo that the info of session can be stored amongst all the children what is Provider.jsx
+
+Degrade the version to 4 for the project
+
+inroutes setup the providers like google and github and call using getproviders in nav also use useSession?.user for every info to to displayed.
+Kahin bhi User relted info chahiye th just use useSession and get it
+
+
+For image change the nextjs.config file to silve the error
+Add this  images: {
+        remotePatterns: 
+        [{
+            protocol:'https',
+            hostname:'lh3.googleusercontent.com'
+        }],
+      },
+};
+
+
+
+This is the basic template for creating API routes in NEXTjs
+export default function handler(req, res) {
+    res.status(200).json({ message: 'Hello, Next.js!' });
+}
+
+
+similary we create get posts and await for response in Feed.jsx
+
+
+
+
+
